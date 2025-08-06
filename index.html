@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>BookAdvisor - Your Literary Guide</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="script.js" defer></script>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>Welcome to BookAdvisor</h1>
+            <p>Your personal book recommendation assistant</p>
+        </div>
+    </header>
+
+    <main class="container">
+        <section class="intro">
+            <h2>Looking for your next great read?</h2>
+            <p>Let us help you discover the perfect book. Share your preferences, and we'll suggest books tailored to you.</p>
+        </section>
+
+        <section class="preferences">
+            <h3>Tell us what you're looking for:</h3>
+            <form id="book-preference-form">
+                <label for="genre">Choose a genre:</label>
+                <select id="genre" name="genre">
+                    <option value="fiction">Fiction</option>
+                    <option value="mystery">Mystery</option>
+                    <option value="romance">Romance</option>
+                    <option value="fantasy">Fantasy</option>
+                    <option value="thriller">Thriller</option>
+                    <option value="non-fiction">Non-fiction</option>
+                    <option value="biography">Biography</option>
+                </select>
+
+                <label for="length">Book length:</label>
+                <select id="length" name="length">
+                    <option value="short">Short (Under 200 pages)</option>
+                    <option value="medium">Medium (200-400 pages)</option>
+                    <option value="long">Long (400+ pages)</option>
+                </select>
+
+                <label for="mood">Choose a mood:</label>
+                <select id="mood" name="mood">
+                    <option value="light">Light and Funny</option>
+                    <option value="dark">Dark and Mysterious</option>
+                    <option value="uplifting">Uplifting</option>
+                    <option value="thought-provoking">Thought-Provoking</option>
+                </select>
+
+                <button type="submit">Get Recommendations</button>
+            </form>
+        </section>
+
+        <section id="recommendations" class="recommendations">
+            <h3>Book Recommendations:</h3>
+            <ul id="recommendation-list">
+                <!-- Suggested books will appear here -->
+            </ul>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 BookAdvisor. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Watson Assistant Chat Integration -->
+    <script>
+        window.watsonAssistantChatOptions = {
+            integrationID: "286723ab-4f7c-4429-bfe1-691982702e25", // The ID of this integration.
+            region: "au-syd", // The region your integration is hosted in.
+            serviceInstanceID: "b83a44bb-59e0-416c-91d6-4f2afb72bcb8", // The ID of your service instance.
+            onLoad: async (instance) => { await instance.render(); }
+        };
+        setTimeout(function(){
+            const t=document.createElement('script');
+            t.src="https://web-chat.global.assistant.watson.appdomain.cloud/versions/" + (window.watsonAssistantChatOptions.clientVersion || 'latest') + "/WatsonAssistantChatEntry.js";
+            document.head.appendChild(t);
+        });
+    </script>
+</body>
+</html>
