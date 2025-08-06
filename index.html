@@ -6,75 +6,224 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>BookAdvisor - Your Literary Guide</title>
     <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <script src="script.js" defer></script>
 </head>
 <body>
-    <header>
+    <header class="hero">
         <div class="container">
-            <h1>Welcome to BookAdvisor</h1>
-            <p>Your personal book recommendation assistant</p>
+            <nav class="navbar">
+                <div class="logo">
+                    <i class="fas fa-book-open"></i>
+                    <span>BookAdvisor</span>
+                </div>
+                <div class="nav-links">
+                    <a href="#home">Home</a>
+                    <a href="#recommendations">Recommendations</a>
+                    <a href="#about">About</a>
+                </div>
+            </nav>
+            <div class="hero-content">
+                <h1>Discover Your Next Great Read</h1>
+                <p class="hero-subtitle">Personalized book recommendations powered by AI to match your unique taste and mood</p>
+                <a href="#preferences" class="cta-button">
+                    <i class="fas fa-magic"></i>
+                    Get Started
+                </a>
+            </div>
         </div>
+        <div class="hero-bg"></div>
     </header>
 
-    <main class="container">
-        <section class="intro">
-            <h2>Looking for your next great read?</h2>
-            <p>Let us help you discover the perfect book. Share your preferences, and we'll suggest books tailored to you.</p>
+    <main>
+        <section id="preferences" class="preferences-section">
+            <div class="container">
+                <div class="section-header">
+                    <h2>Tell Us What You're Looking For</h2>
+                    <p>Help us understand your preferences to find the perfect book match</p>
+                </div>
+                
+                <div class="preferences-card">
+                    <form id="book-preference-form" class="preference-form">
+                        <div class="form-grid">
+                            <div class="form-group">
+                                <label for="genre">
+                                    <i class="fas fa-layer-group"></i>
+                                    Genre
+                                </label>
+                                <select id="genre" name="genre" required>
+                                    <option value="">Select a genre</option>
+                                    <option value="fiction">Fiction</option>
+                                    <option value="mystery">Mystery & Thriller</option>
+                                    <option value="romance">Romance</option>
+                                    <option value="fantasy">Fantasy & Sci-Fi</option>
+                                    <option value="thriller">Thriller</option>
+                                    <option value="non-fiction">Non-fiction</option>
+                                    <option value="biography">Biography & Memoir</option>
+                                    <option value="history">History</option>
+                                    <option value="self-help">Self-Help</option>
+                                </select>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="length">
+                                    <i class="fas fa-clock"></i>
+                                    Reading Time
+                                </label>
+                                <select id="length" name="length" required>
+                                    <option value="">Select length</option>
+                                    <option value="short">Quick Read (Under 200 pages)</option>
+                                    <option value="medium">Standard (200-400 pages)</option>
+                                    <option value="long">Epic (400+ pages)</option>
+                                </select>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="mood">
+                                    <i class="fas fa-heart"></i>
+                                    Mood
+                                </label>
+                                <select id="mood" name="mood" required>
+                                    <option value="">Select mood</option>
+                                    <option value="light">Light & Humorous</option>
+                                    <option value="dark">Dark & Mysterious</option>
+                                    <option value="uplifting">Uplifting & Inspiring</option>
+                                    <option value="thought-provoking">Deep & Thought-Provoking</option>
+                                    <option value="adventurous">Adventurous & Exciting</option>
+                                    <option value="romantic">Romantic & Emotional</option>
+                                </select>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="era">
+                                    <i class="fas fa-calendar-alt"></i>
+                                    Time Period
+                                </label>
+                                <select id="era" name="era">
+                                    <option value="">Any time period</option>
+                                    <option value="contemporary">Contemporary</option>
+                                    <option value="historical">Historical</option>
+                                    <option value="classic">Classic Literature</option>
+                                    <option value="recent">Recent Releases</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <button type="submit" class="submit-btn">
+                            <i class="fas fa-search"></i>
+                            Find My Perfect Books
+                            <div class="btn-shine"></div>
+                        </button>
+                    </form>
+                </div>
+            </div>
         </section>
 
-        <section class="preferences">
-            <h3>Tell us what you're looking for:</h3>
-            <form id="book-preference-form">
-                <label for="genre">Choose a genre:</label>
-                <select id="genre" name="genre">
-                    <option value="fiction">Fiction</option>
-                    <option value="mystery">Mystery</option>
-                    <option value="romance">Romance</option>
-                    <option value="fantasy">Fantasy</option>
-                    <option value="thriller">Thriller</option>
-                    <option value="non-fiction">Non-fiction</option>
-                    <option value="biography">Biography</option>
-                </select>
+        <section id="recommendations" class="recommendations-section">
+            <div class="container">
+                <div class="section-header">
+                    <h2>Your Personalized Recommendations</h2>
+                    <p>Handpicked books based on your preferences</p>
+                </div>
+                
+                <div id="loading" class="loading-spinner" style="display: none;">
+                    <div class="spinner"></div>
+                    <p>Finding your perfect books...</p>
+                </div>
 
-                <label for="length">Book length:</label>
-                <select id="length" name="length">
-                    <option value="short">Short (Under 200 pages)</option>
-                    <option value="medium">Medium (200-400 pages)</option>
-                    <option value="long">Long (400+ pages)</option>
-                </select>
+                <div id="recommendation-results" class="recommendation-grid">
+                    <!-- Recommended books will appear here -->
+                </div>
 
-                <label for="mood">Choose a mood:</label>
-                <select id="mood" name="mood">
-                    <option value="light">Light and Funny</option>
-                    <option value="dark">Dark and Mysterious</option>
-                    <option value="uplifting">Uplifting</option>
-                    <option value="thought-provoking">Thought-Provoking</option>
-                </select>
-
-                <button type="submit">Get Recommendations</button>
-            </form>
+                <div id="no-results" class="no-results" style="display: none;">
+                    <i class="fas fa-search"></i>
+                    <h3>No results yet</h3>
+                    <p>Fill out the form above to get personalized recommendations</p>
+                </div>
+            </div>
         </section>
 
-        <section id="recommendations" class="recommendations">
-            <h3>Book Recommendations:</h3>
-            <ul id="recommendation-list">
-                <!-- Suggested books will appear here -->
-            </ul>
+        <section class="features-section">
+            <div class="container">
+                <div class="section-header">
+                    <h2>Why Choose BookAdvisor?</h2>
+                    <p>Your gateway to discovering amazing books</p>
+                </div>
+                
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-brain"></i>
+                        </div>
+                        <h3>AI-Powered</h3>
+                        <p>Advanced algorithms analyze your preferences to suggest books you'll love</p>
+                    </div>
+                    
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-users"></i>
+                        </div>
+                        <h3>Community Driven</h3>
+                        <p>Recommendations based on reviews from thousands of book lovers</p>
+                    </div>
+                    
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-star"></i>
+                        </div>
+                        <h3>Curated Quality</h3>
+                        <p>Only the best books make it to our recommendation database</p>
+                    </div>
+                </div>
+            </div>
         </section>
     </main>
 
-    <footer>
+    <footer class="footer">
         <div class="container">
-            <p>&copy; 2025 BookAdvisor. All rights reserved.</p>
+            <div class="footer-content">
+                <div class="footer-section">
+                    <div class="logo">
+                        <i class="fas fa-book-open"></i>
+                        <span>BookAdvisor</span>
+                    </div>
+                    <p>Helping readers discover their next favorite book since 2025</p>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="#home">Home</a></li>
+                        <li><a href="#recommendations">Recommendations</a></li>
+                        <li><a href="#about">About</a></li>
+                        <li><a href="#contact">Contact</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Follow Us</h4>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-facebook"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-goodreads"></i></a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2025 BookAdvisor. All rights reserved. Made with <i class="fas fa-heart"></i> for book lovers.</p>
+            </div>
         </div>
     </footer>
 
     <!-- Watson Assistant Chat Integration -->
     <script>
         window.watsonAssistantChatOptions = {
-            integrationID: "286723ab-4f7c-4429-bfe1-691982702e25", // The ID of this integration.
-            region: "au-syd", // The region your integration is hosted in.
-            serviceInstanceID: "b83a44bb-59e0-416c-91d6-4f2afb72bcb8", // The ID of your service instance.
+            integrationID: "286723ab-4f7c-4429-bfe1-691982702e25",
+            region: "au-syd",
+            serviceInstanceID: "b83a44bb-59e0-416c-91d6-4f2afb72bcb8",
             onLoad: async (instance) => { await instance.render(); }
         };
         setTimeout(function(){
